@@ -12,7 +12,7 @@ data.isnull()
 
 # describe data set
 data.describe()
-
+#
 data.shape
 
 plt.figure(figsize=(8,6))
