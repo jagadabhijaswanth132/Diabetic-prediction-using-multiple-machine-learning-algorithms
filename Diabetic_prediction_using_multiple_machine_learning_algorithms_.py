@@ -68,4 +68,4 @@ from sklearn.preprocessing import LabelEncoder
 #transforming categorical to numerical columns
 data ['gender'] = LabelEncoder().fit_transform(data ['gender'])
 data ['smoking_history'] = LabelEncoder().fit_transform(data ['smoking_history'])
-data.head()
+data.head(5)
