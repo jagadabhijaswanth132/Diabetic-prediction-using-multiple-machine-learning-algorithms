@@ -69,3 +69,37 @@ from sklearn.preprocessing import LabelEncoder
 data ['gender'] = LabelEncoder().fit_transform(data ['gender'])
 data ['smoking_history'] = LabelEncoder().fit_transform(data ['smoking_history'])
 data.head()
+
+
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.preprocessing import StandardScaler
+
+# separating the features (x) and target variable(y)
+x = data.drop('blood_glucose_level', axis=1) # features
+y = data['blood_glucose_level'] # target variable
+
+#splitting the dataset into training and testing sets
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=42)
+
+# standardizing the featurs
+scaler = StandardScaler()
+x_train_scaled = scaler.fit_transform(x_train)
+x_test_scaled = scaler.transform(x_test)
+
+# Training the linear regresiion model
+model = LinearRegression()
+model.fit(x_train_scaled, y_train)
+
+# making predictions on the testing set
+y_pred = model.predict(x_test_scaled)
+
+# evaluating the model
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print(f'Mean Absolute Error (MAE): {mae:.4f}')
+print(f'Mean Squared Error (MSE): {mse:.4f}')
+print(f'R^2 Score: {r2:.4f}')
