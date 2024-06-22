@@ -60,3 +60,12 @@ plt.xlabel('smoking History')
 plt.ylabel('Average Blood Glucose Level')
 plt.grid(True)
 plt.show()
+
+data.head()
+
+from sklearn.preprocessing import LabelEncoder
+
+#transforming categorical to numerical columns
+data ['gender'] = LabelEncoder().fit_transform(data ['gender'])
+data ['smoking_history'] = LabelEncoder().fit_transform(data ['smoking_history'])
+data.head()
