@@ -103,3 +103,43 @@ r2 = r2_score(y_test, y_pred)
 print(f'Mean Absolute Error (MAE): {mae:.4f}')
 print(f'Mean Squared Error (MSE): {mse:.4f}')
 print(f'R^2 Score: {r2:.4f}')
+
+
+
+# Support Vector Regression (SVR)
+
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVR
+from sklearn.metrics import mean_absolute_error, mean_squared_error,r2_score
+
+# seperating features (x) and target variable (y)
+x = data.drop('blood_glucose_level') #features
+y = data['blood_glucose_level'] #target variable
+
+#splitting the dataset into training and testing sets
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=42)
+
+# standardizing the features (recommended for SVR)
+scalar = StandardScaler()
+x_train_scaled = scaler.fit_transform(x_train)
+x_test_scaled = scaler.transform(x_test)
+
+# Training the SVR model
+model = SVR(kernel='rbf') # radial basis function (RBF) kernel is commonly used
+model.fit(x_train_scaled, y_train)
+
+# making predictions on the testing set
+y_pred = model.predict(x_test_scaled)
+
+# Evaluating the model
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+
+print(f'Mean Absolute ERROR (MAE): {mae:.4f}')
+print(f'Mean Squared Error (MSE): {mse:.4f}')
+print(f'R^2 Score:{r2:.4f}')
