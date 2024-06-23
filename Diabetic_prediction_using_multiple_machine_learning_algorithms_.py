@@ -116,7 +116,7 @@ from sklearn.svm import SVR
 from sklearn.metrics import mean_absolute_error, mean_squared_error,r2_score
 
 # seperating features (x) and target variable (y)
-x = data.drop('blood_glucose_level') #features
+x = data.drop('blood_glucose_level', axis=1) #features
 y = data['blood_glucose_level'] #target variable
 
 #splitting the dataset into training and testing sets
@@ -140,6 +140,6 @@ mse = mean_squared_error(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
 
 
-print(f'Mean Absolute ERROR (MAE): {mae:.4f}')
-print(f'Mean Squared Error (MSE): {mse:.4f}')
-print(f'R^2 Score:{r2:.4f}')
+print(f'Mean Absolute ERROR (MAE)svr: {mae:.4f}')
+print(f'Mean Squared Error (MSE)svr: {mse:.4f}')
+print(f'R^2 Score svr:{r2:.4f}')
