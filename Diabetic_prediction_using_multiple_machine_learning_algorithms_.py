@@ -145,5 +145,54 @@ print(f'Mean Absolute ERROR (MAE)svr: {mae:.4f}')
 print(f'Mean Squared Error (MSE)svr: {mse:.4f}')
 print(f'R^2 Score svr:{r2:.4f}')
 
+# logestic regression classification
 
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+
+# separating features (x) and target variable (y)
+x = data.drop('diabetes', axis=1) # Features
+y = data['diabetes'] # Target variable
+
+# splitting the dataset into training and testing sets
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.25, random_state=42)
+
+# standardizing the features (recpmmended for Logistic Regression)
+scalar = StandardScaler()
+x_train_scaled = scalar.fit_transform(x_train)
+x_test_scaled = scalar.transform(x_test)
+
+# Training the Logistic Regression model
+model = LogisticRegression(max_iter=1000)
+model.fit(x_train_scaled, y_train)
+
+#Making predictions on the testing set
+y_pred = model.predict(x_test_scaled)
+
+# Evaluating the model
+accuracy = accuracy_score(y_test, y_pred)
+print(f'Accuracy of Logistic Regression: {accuracy:.4f}')
+
+#printing the classification report
+print('\nClassification Report:')
+print(classification_report(y_test, y_pred))
+
+# printing confusion matrix
+print('\nConfusion Matrix:')
+print(confusion_matrix(y_test, y_pred))
+
+from sklearn.metrics import confusion_matrix
+
+# Computing the confusion matrix
+cm = confusion_matrix(y_test, y_pred)
+
+# Plotting confusion matrix heatmap
+plt.figure(figsize=(8, 6))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', cbar=False,
+            annot_kws={'fontsize': 14}, linewidths=0.5)
+plt.title('Confusion Matrix - Logistic Regression')
+plt.xlabel('Predicted labels')
+plt.ylabel('True labels')
+plt.show()
 
