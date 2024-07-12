@@ -196,3 +196,45 @@ plt.xlabel('Predicted labels')
 plt.ylabel('True labels')
 plt.show()
 
+# Random Forest Classifier
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+
+# Saperating features (x) and traget variable (y)
+x = data.drop('diabetes', axis=1) #Features
+y = data['diabetes'] # Target variables
+
+# Splitting the dataset into training andtesting sets
+x_test, x_test, y_train, y_test = train_test_split(x, y, test_size=0.25, random_state=42)
+
+# Training the Random Forest Classifier model
+model = RandomForestClassifier(random_state=42)
+model.fit(x_train, y_train)
+
+#Making prediction on the testing set
+y_pred = model.predict(x_test)
+
+# Evaluating the model
+accuracy = accuracy_score(y_test, y_pred)
+print(f'Accuracy of Random Forest Classifier: {accuracy:.4f}')
+
+# Printing classification report
+print('\nClassification Report:')
+print(classification_report(y_test, y_pred))
+
+# Printing confusion matrix
+print('\nConfusion Matrix;')
+print(confusion_matrix(y_test, y_pred))
+
+# Computing confusion matrix
+cm_rf = confusion_matrix(y_test, y_pred)
+
+# Plotting confusion matrix heatmap for Random Forest Classifier
+plt.figure(figsize=(8, 6))
+sns.heatmap(cm_rf, annot=True, fmt='d', cmap='Greens', cbar=False,
+            annot_kws={'fontsize': 14}, linewidths=0.5)
+plt.title('Confusion Matrix - Random Forest Classifier')
+plt.xlabel('Predicted labels')
+plt.ylabel('True labels')
+plt.show()
