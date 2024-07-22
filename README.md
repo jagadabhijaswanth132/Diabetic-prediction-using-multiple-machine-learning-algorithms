@@ -10,3 +10,4 @@ consisting of 100,000 records with clinical and demographic information, for exa
 far reaching patient profiles upgrade the approaches' predictive accuracy. The following Ethical contemplations are addressed as the dataset is anonymized and sticks to GDPR prerequisites. 
 
 
+
